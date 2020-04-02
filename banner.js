@@ -59,9 +59,7 @@ function Carousel(config) {
 
     function next() {
         if (index == imgArr.length - 1) {
-            $slider.animate({ left: '-=' + 1200 }, 'slow', function () {
-                $slider.css('left', -1200);
-            });
+            move(index)
             index = 0;
             indexbtn(0)
         }
@@ -72,18 +70,11 @@ function Carousel(config) {
 
         }
     }
-
     function prev() {
         if (index == 0) {
-            $slider.animate(
-                {left: '+=' + 1200 },
-                'slow',
-                function () {
-                $slider.css('left', -1200 * imgArr.length);
-            })
+            move(index)
             indexbtn(imgArr.length - 1)
             index = imgArr.length - 1;
-
         }
         else {
             $slider.animate({ left: '+=' + 1200 }, 'slow');
@@ -123,6 +114,22 @@ function Carousel(config) {
           return 0;
         }
         $slider.animate({'left': step}, 'slow');
+    }
+    function move(dex){
+        if (dex==0){
+            $slider.animate(
+                {left: '+=' + 1200 },
+                'slow',
+                function () {
+                $slider.css('left', -1200 * imgArr.length);
+            })
+        }
+        else{
+            $slider.animate({ left: '-=' + 1200 }, 'slow', function () {
+                $slider.css('left', -1200);
+            });
+            
+        }
     }
     //开始播放
     timer = setInterval(next, fadeTime);
