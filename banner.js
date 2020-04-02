@@ -59,7 +59,9 @@ function Carousel(config) {
 
     function next() {
         if (index == imgArr.length - 1) {
-            move(index)
+            $slider.animate({ left: '-=' + 1200 }, 'slow', function () {
+                $slider.css('left', -1200);
+            });
             index = 0;
             indexbtn(0)
         }
@@ -70,11 +72,18 @@ function Carousel(config) {
 
         }
     }
+
     function prev() {
         if (index == 0) {
-            move(index)
+            $slider.animate(
+                {left: '+=' + 1200 },
+                'slow',
+                function () {
+                $slider.css('left', -1200 * imgArr.length);
+            })
             indexbtn(imgArr.length - 1)
             index = imgArr.length - 1;
+
         }
         else {
             $slider.animate({ left: '+=' + 1200 }, 'slow');
@@ -115,6 +124,7 @@ function Carousel(config) {
         }
         $slider.animate({'left': step}, 'slow');
     }
+    
     function move(dex){
         if (dex==0){
             $slider.animate(
